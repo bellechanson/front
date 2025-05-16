@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import '../style/Home.css';
-import BoardTag from "../components/BoardTag";
+import BoardTag from "../components/board/BoardTag";
 
 function Home() {
     const navigate = useNavigate();

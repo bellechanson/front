@@ -1773,7 +1773,7 @@ querystringify@^2.1.1:
 
 react-calendar@^5.1.0:
   version "5.1.0"
-  resolved "https://registry.npmjs.org/react-calendar/-/react-calendar-5.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-5.1.0.tgz#f5d3342a872cbb8907099ca5651bc936046033b8"
   integrity sha512-09o/rQHPZGEi658IXAJtWfra1N69D1eFnuJ3FQm9qUVzlzNnos1+GWgGiUeSs22QOpNm32aoVFOimq0p3Ug9Eg==
   dependencies:
     "@wojtekmaj/date-utils" "^1.1.3"

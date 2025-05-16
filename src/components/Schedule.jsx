@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../style/Schedule.css';
+import '../style/group/Schedule.css';
 
 const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 const monthNames = [

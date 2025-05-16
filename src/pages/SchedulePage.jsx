@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Schedule from '../components/Schedule';
-import '../style/SchedulePage.css';
+import '../style/group/SchedulePage.css';
 
 const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
