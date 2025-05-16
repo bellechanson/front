@@ -1,0 +1,83 @@
+.search-container {
+    margin: 40px auto;
+    text-align: center;
+    width: 118%;
+}
+
+.search-container input {
+    padding: 6px;
+    width: 60%;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.search-container button {
+    padding: 6px 18px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-results {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.search-card {
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 12px;
+}
+
+.search-card h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.search-card p {
+    margin: 8px 0;
+    color: #666;
+}
+
+.search-card .meta {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.search-bar-wrapper {
+    margin: 0 auto;
+    padding: 20px 0;
+    max-width: 800px;
+}
+
+.autocomplete-list {
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: 400px;
+    z-index: 10;
+}
+
+.autocomplete-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+    background-color: #f0f0f0;
+}
+
