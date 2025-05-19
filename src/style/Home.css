@@ -5,13 +5,19 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    transform: translateY(-15vh); /* 위로 10%만큼 끌어올림 */
     font-family: Arial, sans-serif;
 }
+
 
 .home-page h1 {
     font-size: 3rem;
     margin-bottom: 30px;
-    color: #333;
+    color: #6366f1;
+}
+
+.home-page h1:hover {
+    transform: scale(1.05);
 }
 
 .home-page .search-box {
@@ -53,3 +59,64 @@
 .home-page .tag:hover {
     background-color: #e0e0e0;
 }
+
+.book-background {
+    position: fixed;
+    background-color: red;
+    margin-top: 10vh;
+    margin-left: 10vw;
+    width: 25vw;
+    height: 20vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.floating-book {
+    position: absolute;
+    width: 150px;
+    opacity: 0.6;
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-30px) rotate(15deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.click-box{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-page .home-search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.home-page .home-search-button img {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.2s ease;
+}
+
+.home-page .home-search-button:hover img {
+    transform: scale(1.1);
+}
+
+

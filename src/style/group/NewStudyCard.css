@@ -1,0 +1,7 @@
+.home-study-list{
+    display: flex;
+    flex-direction: row;
+}
+.study-card {
+    margin: 6px;
+}

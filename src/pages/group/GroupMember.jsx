@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CustomCalendar from '../../components/group/Calendar.jsx';
 import TodoList from '../../components/group/TodoList';
 import { getTodos } from '../../todoApi'; // 기존 투두 API 유지
-import ChatRoom from '../../components/group/ChatRoom';
+import ChatRoom from '../../components/group/Chatroom.jsx';
 
 import {
     getStudyGroupById,

@@ -34,7 +34,7 @@ function Header() {
 
     return (
         <div className="header">
-            <h1 onClick={() => navigate("/")} className="logo">
+            <h1 onClick={() => navigate("/")} className="home-logo">
                 STUDYLOG
             </h1>
             <nav className="nav-menu">
@@ -42,7 +42,6 @@ function Header() {
                 <span onClick={() => navigate("/study/create")}>스터디 만들기</span>
                 <span onClick={() => navigate("/board")}>게시판</span>
                 <span onClick={() => navigate("/schedule")}>일정</span>
-                <span onClick={() => navigate("/openai-test")}>AI 테스트</span>
             </nav>
             <div className="header-buttons">
                 {isAdmin && (

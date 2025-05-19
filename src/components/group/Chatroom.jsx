@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
+import api from "../../api/api.js";
+import {WS_URL} from "../../api/ChatApi.js";
 import '../../style/group/ChatRoom.css';
-import api, { WS_URL } from '../../api/ChatApi.js';
 
 const ChatRoom = ({ groupId, userEmail, userName }) => {
     const [messages, setMessages] = useState([]);
@@ -30,6 +31,7 @@ const ChatRoom = ({ groupId, userEmail, userName }) => {
     useEffect(() => {
         if (!groupId) return;
         api.get(`/api/group/chat/${groupId}/messages`)
+
             .then((res) => {
                 setMessages(res.data)
                 setTimeout(() => scrollToBottom(), 0);
