@@ -1,0 +1,237 @@
+/* 페이지 컨테이너 */
+.study-page {
+    width: 80vw;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+/* 제목 스타일 */
+.study-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* 스터디 정보 (플렉스 박스) */
+.study-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.study-category-location {
+    display: flex;
+    gap: 15px;
+}
+
+.study-category, .study-location {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+}
+
+.study-members {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* 섹션 제목 스타일 */
+.section-title {
+    font-size: 1.6rem;
+    color: #34495e;
+    margin-bottom: 12px;
+    border-bottom: 3px solid #ecf0f1;
+    padding-bottom: 8px;
+    font-weight: 600;
+}
+
+/* 스터디 소개 및 스터디장 섹션 */
+.study-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.section {
+    flex: 1;
+}
+
+/* 스터디 설명 */
+.study-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2c3e50;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+/* 스터디장 정보 */
+.study-owner {
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* 모임 일정 */
+.study-schedule {
+    margin-top: 40px;
+}
+
+.schedule-details p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin: 8px 0;
+}
+
+/* study-features (사용 도구, 스터디 혜택, 모임 일정) */
+.study-features {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.tools, .benefits {
+    flex: 1;
+}
+
+.tools-list, .benefits-list {
+    list-style-type: disc;
+    padding-left: 25px;
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.tool-item, .benefit-item {
+    margin-bottom: 10px;
+}
+
+/* 도구 및 혜택 제목 스타일 */
+.tools .section-title, .benefits .section-title {
+    margin-bottom: 15px;
+}
+
+/* 커리큘럼 */
+.curriculum {
+    margin-top: 40px;
+}
+
+.week {
+    margin-bottom: 30px;
+}
+
+.week-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.week-topics {
+    padding-left: 25px;
+    list-style-type: square;
+}
+
+.week-topic {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+/* 할 일 컨테이너 */
+.todo-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/* 캘린더 */
+.custom-calendar {
+    background-color: #f4f6f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.todo-list {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.todo-item {
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+/* 채팅룸 */
+.chat-room {
+    margin-top: 50px;
+    background-color: #f4f6f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chat-room-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input input {
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    width: 80%;
+    border-radius: 20px;
+    background-color: #ecf0f1;
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-input button:hover {
+    background-color: #2980b9;
+}
+
+.todo-cont{
+    display: flex;
+    flex-direction: row;
+}

@@ -1,5 +1,5 @@
 .react-calendar {
-    width: 40%; /* 전체 캘린더 넓이 */
+    width: 100%; /* 전체 캘린더 넓이 */
     max-width: 100%;
     background: white;
     border-radius: 20px;

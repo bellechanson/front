@@ -5,6 +5,8 @@ import TodoList from '../../components/group/TodoList';
 import { getTodos } from '../../todoApi'; // 기존 투두 API 유지
 import ChatRoom from '../../components/group/Chatroom.jsx';
 
+import "../../style/group/GroupMember.css"
+
 import {
     getStudyGroupById,
     getStudyDetail,
@@ -90,84 +92,64 @@ function GroupMember() {
     if (!study || !detail) return <div>스터디를 찾을 수 없습니다.</div>;
 
     return (
-        <div>
-            <h1>{study.title}</h1>
-            <div>
-                <span>{study.category}</span> | <span>{study.location}</span> | <span>{study.currentMember}/{study.maxMember}명</span>
+        <div className="study-page">
+            <h1 className="study-title">{study.title}</h1>
+
+            <div className="study-info">
+                <div className="study-category-location">
+                    <span className="study-category">{study.category}</span> |
+                    <span className="study-location">{study.location}</span>
+                </div>
+                <span className="study-members">{study.currentMember}/{study.maxMember}명</span>
             </div>
 
-            <h2>스터디 소개</h2>
-            <p>{study.description}</p>
+            <div className="study-sections">
+                <div className="section">
+                    <h2 className="section-title">스터디 소개</h2>
+                    <p className="study-description">{study.description}</p>
+                </div>
 
-            <h2>모임 일정</h2>
-            <p>방식: {study.meetingType === 'online' ? '온라인' : '오프라인'}</p>
-            <p>요일: {Array.isArray(study.meetingDay) ? study.meetingDay.join(', ') : ''}</p>
-            <p>시간: {study.meetingTime}</p>
-            <p>기간: {study.startDate} ~ {study.endDate}</p>
+                <div className="section">
+                    <h2 className="section-title">스터디장</h2>
+                    <p className="study-owner">작성자 ID: {study.ownerId}</p>
+                </div>
+            </div>
 
-            <h2>커리큘럼</h2>
-            {curriculum.map((week, idx) => (
-                <div key={idx}>
-                    <h3>{week.week}주차: {week.title}</h3>
-                    <ul>
-                        {Array.isArray(week.topics) && week.topics.map((topic, i) => (
-                            <li key={i}>{topic}</li>
+            <div className="study-schedule">
+                <h2 className="section-title">모임 일정</h2>
+                <div className="schedule-details">
+                    <p className="meeting-type">방식: {study.meetingType === 'online' ? '온라인' : '오프라인'}</p>
+                    <p className="meeting-day">요일: {Array.isArray(study.meetingDay) ? study.meetingDay.join(', ') : ''}</p>
+                    <p className="meeting-time">시간: {study.meetingTime}</p>
+                    <p className="study-duration">기간: {study.startDate} ~ {study.endDate}</p>
+                </div>
+            </div>
+
+            <div className="study-features">
+                <div className="tools">
+                    <h2 className="section-title">사용 도구</h2>
+                    <ul className="tools-list">
+                        {Array.isArray(detail.tools) && detail.tools.map((tool, idx) => (
+                            <li key={idx} className="tool-item">{tool}</li>
                         ))}
                     </ul>
                 </div>
-            ))}
 
-            <h2>참여 조건</h2>
-            <ul>
-                {Array.isArray(detail.requirements) && detail.requirements.map((req, idx) => (
-                    <li key={idx}>{req}</li>
-                ))}
-            </ul>
-
-            <h2>사용 도구</h2>
-            <ul>
-                {Array.isArray(detail.tools) && detail.tools.map((tool, idx) => (
-                    <li key={idx}>{tool}</li>
-                ))}
-            </ul>
-
-            <h2>스터디 혜택</h2>
-            <ul>
-                {Array.isArray(detail.benefits) && detail.benefits.map((b, idx) => (
-                    <li key={idx}>{b}</li>
-                ))}
-            </ul>
-
-            <h2>스터디장</h2>
-            <p>작성자 ID: {study.ownerId}</p>
-
-            {!isJoined &&
-                study.currentMember < study.maxMember &&
-                user?.email !== study.ownerId && (
-                    <button onClick={handleJoinClick}>
-                        참여하기
-                    </button>
-                )}
-
-            {showJoinModal && (
-                <div>
-                    <h2>스터디 참여 신청</h2>
-                    <form onSubmit={handleJoinSubmit}>
-                        <textarea
-                            value={joinMessage}
-                            onChange={(e) => setJoinMessage(e.target.value)}
-                            placeholder="참여 동기를 작성해주세요"
-                            required
-                        />
-                        <div>
-                            <button type="button" onClick={() => setShowJoinModal(false)}>취소</button>
-                            <button type="submit">신청하기</button>
-                        </div>
-                    </form>
+                <div className="benefits">
+                    <h2 className="section-title">스터디 혜택</h2>
+                    <ul className="benefits-list">
+                        {Array.isArray(detail.benefits) && detail.benefits.map((b, idx) => (
+                            <li key={idx} className="benefit-item">{b}</li>
+                        ))}
+                    </ul>
                 </div>
-            )}
-            <CustomCalendar onDateChange={setSelectedDate} todos={todos} />
-            <TodoList selectedDate={selectedDate} todos={todos} />
+            </div>
+
+            <div className='todo-cont'>
+                <CustomCalendar onDateChange={setSelectedDate} todos={todos} />
+                <TodoList selectedDate={selectedDate} todos={todos} />
+            </div>
+
             {study && userEmail && userName && (
                 <ChatRoom groupId={id} userEmail={userEmail} userName={userName} />
             )}
