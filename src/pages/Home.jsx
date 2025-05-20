@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import '../style/Home.css';
 import ClickableBox from "../components/ClickableBox.jsx";
 import StudyCardList from "../components/group/StudyCardList.jsx"; // 🔥 추가
@@ -7,6 +7,7 @@ import StudyCardList from "../components/group/StudyCardList.jsx"; // 🔥 추�
 function Home() {
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState("");
+    const [birdVisible, setBirdVisible] = useState(false); // ✅ bird 등장 제어
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter" && keyword.trim() !== "") {
@@ -20,9 +21,28 @@ function Home() {
         }
     };
 
+    useEffect(() => {
+        // flybird 애니메이션 종료 타이밍에 맞춰 bird 표시
+        const timer = setTimeout(() => {
+            setBirdVisible(true);
+        }, 4100); // fly-diagonal 애니메이션 시간과 맞춤
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="home-page">
-            <h1>STUDYLOG</h1>
+            <div className="logo-wrapper">
+                <img src="/images/flybird.jpg" alt="flybird" className="fly-bird" />
+                <img
+                    src="/images/bird.jpg"
+                    className="bird-icon"
+                    alt="bird"
+                    style={{ opacity: birdVisible ? 1 : 0 }} // ✅ 상태로 등장 제어
+                />
+                <h1>STUDYLOG</h1>
+            </div>
+
             <div className="search-box">
                 <input
                     type="text"
