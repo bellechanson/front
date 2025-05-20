@@ -1,33 +1,90 @@
 .search-container {
-    margin: 40px auto;
+    margin-top: -30px;
+    margin-left: -150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 50px;
     text-align: center;
     width: 118%;
+    position: relative;
+    background-color: white;
+    border-radius: 12px;      /* ✅ 둥글게 처리 (선택) */
 }
 
+
+/* 검색 input */
 .search-container input {
-    padding: 6px;
+    padding: 13px;
     width: 60%;
     font-size: 1rem;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-right: 10px;
+    border: 2px solid #6366f1; /* ✅ 검은 테두리 */
 }
 
-.search-container button {
-    padding: 6px 18px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
+/* 이미지 검색 버튼 */
+.search-button {
+    background: none;
     border: none;
-    border-radius: 5px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.search-button img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.search-button img:hover {
+    transform: scale(1.1);
+}
+
+/* 자동완성 목록 */
+.autocomplete-list {
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    background: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.autocomplete-list li {
+    padding: 10px;
     cursor: pointer;
 }
 
+.autocomplete-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.no-results {
+    color: #aaa;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 검색 결과 영역 */
 .search-results {
     margin-top: 20px;
     text-align: left;
 }
 
+/* 검색 카드 */
 .search-card {
     background: #f9f9f9;
     padding: 16px;
@@ -51,33 +108,3 @@
     font-size: 0.85rem;
     color: #888;
 }
-
-.search-bar-wrapper {
-    margin: 0 auto;
-    padding: 20px 0;
-    max-width: 800px;
-}
-
-.autocomplete-list {
-    margin-top: 0;
-    padding: 0;
-    list-style: none;
-    background: white;
-    border: 1px solid #ccc;
-    border-top: none;
-    max-height: 200px;
-    overflow-y: auto;
-    position: absolute;
-    width: 400px;
-    z-index: 10;
-}
-
-.autocomplete-list li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.autocomplete-list li:hover {
-    background-color: #f0f0f0;
-}
-

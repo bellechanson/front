@@ -67,12 +67,14 @@ function SearchBar() {
         <div className="search-container">
             <input
                 type="text"
-                placeholder="검색어를 입력하세요"
+                placeholder="이곳은 자유 게시판 입니다"
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={handleKeyPress}
             />
-            <button onClick={handleSearch}>검색</button>
+            <button className="search-button" onClick={handleSearch}>
+                <img src="/images/Search.jpg" alt="검색" />
+            </button>
 
             {keyword.trim() && (
                 <ul className="autocomplete-list">

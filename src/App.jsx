@@ -28,6 +28,7 @@ import StudyDetail from './pages/group/StudyDetail';
 import RestoreAccount from './pages/user/RestoreAccount';
 import AdminPage from './pages/admin/AdminPage';
 import GroupMember from "./pages/group/GroupMember.jsx";
+import AuthFormWrapper from "./pages/user/AuthFormWrapper.jsx";
 
 
 
@@ -109,7 +110,7 @@ function App() {
             {!hideLayout && <Header />}
             {hideLayout ? (
                 <Routes>
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<AuthFormWrapper />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/restore-account" element={<RestoreAccount />} />

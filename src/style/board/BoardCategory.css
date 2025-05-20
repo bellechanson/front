@@ -21,7 +21,7 @@
   }
   
   .board-item.selected {
-    background-color: #ffcbdc; 
+    background-color: #6366f1;
     color: white; 
     font-weight: bold;
   }

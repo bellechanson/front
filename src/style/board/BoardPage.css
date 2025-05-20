@@ -8,7 +8,7 @@
 }
 
 .banner {
-  background-color: #113554;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
   color: white;
   padding: 20px;
   margin-bottom: 20px;
@@ -31,19 +31,24 @@
 .board-sidebar-left {
   border-radius: 8px;
   align-self: start;
-  position: sticky;
-  height: fit-content; /* 내용에 맞춰 높이 자동 조절 */
-  z-index: 10; /* 다른 요소들이 겹치지 않도록 z-index 설정 */
+  margin-top: 150px; /* 아래로 40px 내림 */
+  height: fit-content;
+  z-index: 10;
+  transform: translateX(-50px);
+
 }
+
+
 
 /* 우측 사이드바 스타일 */
 .board-sidebar-right {
   border: 1px solid #ddd;
   border-radius: 8px;
   align-self: start;
-  position: sticky;
+  margin-top: 150px;
   height: fit-content; /* 내용에 맞춰 높이 자동 조절 */
   z-index: 10; /* 다른 요소들이 겹치지 않도록 z-index 설정 */
+  transform: translateX(50px);
 }
 
 /* 사이드바 제목 */
@@ -71,17 +76,18 @@
 }
 
 .board-main-header button {
-  padding: 8px 12px;
+  padding: 13px 5px;
   font-size: 14px;
-  background-color: #007bff;
+  background-color: #ffffff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .board-main-header button:hover {
-  background-color: #0056b3;
+  background-color: #ffffff;
 }
 
 /* 검색 폼 영역 스타일 */
@@ -131,15 +137,16 @@
 .board-main-header-content button {
   padding: 8px 12px;
   font-size: 14px;
-  background-color: #007bff;
+  background-color: #6366f1;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .board-main-header-content button:hover {
-  background-color: #0056b3;
+  background-color: #ddd;
 }
 
 /* 게시글 목록 스타일 (세로 스크롤과 구분선) */

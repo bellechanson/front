@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../style/user/Register.css";
-import api from "../../api/api.js";
+import axios from "axios";
 
-function Register() {
+import "../../style/user/Register.css";
+
+function Register({ onSwitch }) {
     const navigate = useNavigate();
     const [form, setForm] = useState({
         uEmail: "",
@@ -29,17 +30,14 @@ function Register() {
         }
 
         try {
-            // 임시로 회원가입 정보를 로컬 스토리지에 저장
             localStorage.setItem('tempRegisterData', JSON.stringify(form));
-            
-            // 이메일 인증 요청
-            await api.post("/api/mail/send-verification", null, {
+
+            await axios.post("http://localhost:8921/api/mail/send-verification", null, {
                 params: {
                     email: form.uEmail
                 }
             });
-            
-            // 이메일 인증 페이지로 이동
+
             navigate("/email-verification");
         } catch (error) {
             if (error.response && error.response.data) {
@@ -51,59 +49,79 @@ function Register() {
     };
 
     return (
-        <div className="register-page">
-            <h2 className="logo" onClick={() => navigate("/")}>STUDYLOG</h2>
-            <form onSubmit={handleSubmit} className="register-form">
-                <label htmlFor="uEmail">이메일</label>
-                <input
-                    type="text"
-                    id="uEmail"
-                    name="uEmail"
-                    placeholder="이메일 입력"
-                    value={form.uEmail}
-                    onChange={handleChange}
-                    required
-                />
+        <>
+            <div className="login-header">
+                <h1 className="tone1">StudyLog</h1>
+                <p className="tone1">회원가입 정보를 입력해주세요</p>
+            </div>
 
-                <label htmlFor="uPassword">비밀번호</label>
-                <input
-                    type="password"
-                    id="uPassword"
-                    name="uPassword"
-                    placeholder="비밀번호 입력"
-                    value={form.uPassword}
-                    onChange={handleChange}
-                    required
-                />
+            <form className="login-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="uEmail">이메일</label>
+                    <input
+                        type="email"
+                        id="uEmail"
+                        name="uEmail"
+                        placeholder="Enter your email"
+                        className="input1"
+                        value={form.uEmail}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                <label htmlFor="confirmPassword">비밀번호 확인</label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="비밀번호 재입력"
-                    value={form.confirmPassword}
-                    onChange={handleChange}
-                    required
-                />
+                <div className="form-group">
+                    <label htmlFor="uPassword">비밀번호</label>
+                    <input
+                        type="password"
+                        id="uPassword"
+                        name="uPassword"
+                        placeholder="Enter your password"
+                        className="input1"
+                        value={form.uPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
 
-                <label htmlFor="uName">이름</label>
-                <input
-                    type="text"
-                    id="uName"
-                    name="uName"
-                    placeholder="이름 입력"
-                    value={form.uName}
-                    onChange={handleChange}
-                    required
-                />
+                <div className="form-group">
+                    <label htmlFor="confirmPassword">비밀번호 확인</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        className="input1"
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="uName">이름</label>
+                    <input
+                        type="text"
+                        id="uName"
+                        name="uName"
+                        placeholder="Enter your name"
+                        className="input1"
+                        value={form.uName}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
                 {error && <p className="error-message">{error}</p>}
-                <button type="submit">회원가입</button>
-                <p onClick={() => navigate("/login")} className="login-link">
-                    이미 계정이 있으신가요? <span>로그인</span>
-                </p>
+
+                <button type="submit" className="submit-btn">회원가입</button>
             </form>
-        </div>
+
+            <p className="login-footer">
+                이미 계정이 있으신가요?
+                <span className="link" onClick={onSwitch}> 로그인</span>
+            </p>
+        </>
     );
 }
 

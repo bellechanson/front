@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import "../../style/user/Login.css";
-import api from "../../api/api.js";
+// components/ResetPasswordModal.jsx
+import { useState } from 'react';
+import '../../style/user/Modal1.css';
 
-const ResetPassword = () => {
-    const navigate = useNavigate();
-    const [step, setStep] = useState(1); // 1: 이메일 입력, 2: 인증코드 입력, 3: 새 비밀번호 입력
+function ResetPasswordModal({ onClose }) {
+    const [step, setStep] = useState(1);
     const [email, setEmail] = useState('');
     const [verificationCode, setVerificationCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -15,7 +13,7 @@ const ResetPassword = () => {
     const handleSendVerificationCode = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/api/mail/send-verification', null, {
+            await axios.post('http://localhost:8921/api/mail/send-verification', null, {
                 params: { email }
             });
             setStep(2);
@@ -28,7 +26,7 @@ const ResetPassword = () => {
     const handleVerifyCode = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/api/users/verify-code', {
+            await axios.post('http://localhost:8921/api/users/verify-code', {
                 email,
                 code: verificationCode
             });
@@ -47,7 +45,7 @@ const ResetPassword = () => {
         }
 
         try {
-            await api.post('/api/users/reset-password', {
+            await axios.post('http://localhost:8921/api/users/reset-password', {
                 email,
                 newPassword
             });
@@ -59,78 +57,39 @@ const ResetPassword = () => {
     };
 
     return (
-        <div className="login-page">
-            <h2 className="logo" onClick={() => navigate("/")}>STUDYLOG</h2>
-            <div className="login-form">
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <button className="modal-close" onClick={onClose}>×</button>
+
                 {step === 1 && (
-                    <form onSubmit={handleSendVerificationCode}>
-                        <h3>비밀번호 재설정</h3>
-                        <div>
-                            <label htmlFor="email">이메일</label>
-                            <input
-                                type="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
-                        {error && <p className="error-message">{error}</p>}
-                        <button type="submit">인증 코드 전송</button>
-                        <button type="button" onClick={() => navigate('/login')}>로그인으로 돌아가기</button>
-                    </form>
+                    <>
+                        <h3>이메일 인증</h3>
+                        <input type="email" placeholder="이메일 입력" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <button onClick={handleSendVerificationCode}>인증 코드 전송</button>
+                    </>
                 )}
 
                 {step === 2 && (
-                    <form onSubmit={handleVerifyCode}>
+                    <>
                         <h3>인증 코드 확인</h3>
-                        <div>
-                            <label htmlFor="verificationCode">인증 코드</label>
-                            <input
-                                type="text"
-                                id="verificationCode"
-                                value={verificationCode}
-                                onChange={(e) => setVerificationCode(e.target.value)}
-                                required
-                            />
-                        </div>
-                        {error && <p className="error-message">{error}</p>}
-                        <button type="submit">인증 코드 확인</button>
-                        <button type="button" onClick={() => setStep(1)}>이전으로</button>
-                    </form>
+                        <input type="text" placeholder="인증 코드" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} />
+                        <button onClick={handleVerifyCode}>확인</button>
+                    </>
                 )}
 
                 {step === 3 && (
-                    <form onSubmit={handleResetPassword}>
-                        <h3>새 비밀번호 설정</h3>
-                        <div>
-                            <label htmlFor="newPassword">새 비밀번호</label>
-                            <input
-                                type="password"
-                                id="newPassword"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="confirmPassword">비밀번호 확인</label>
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        {error && <p className="error-message">{error}</p>}
-                        <button type="submit">비밀번호 변경</button>
-                        <button type="button" onClick={() => setStep(2)}>이전으로</button>
-                    </form>
+                    <>
+                        <h3>새 비밀번호 입력</h3>
+                        <input type="password" placeholder="새 비밀번호" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                        <input type="password" placeholder="비밀번호 확인" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <button onClick={handleResetPassword}>비밀번호 변경</button>
+                    </>
                 )}
+
+                {error && <p className="error-message">{error}</p>}
             </div>
         </div>
     );
-};
+}
 
-export default ResetPassword; 
+export default ResetPasswordModal;

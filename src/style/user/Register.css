@@ -1,78 +1,110 @@
-.register-page {
+/* Register.css - 로그인과 스타일 통일 */
+
+.register-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+}
+
+.register-container {
+    max-width: 420px;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f2f2f2;
-    height: 100vh;
+    gap: 1rem;
+    color: #111827;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.register-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.register-header p {
+    font-size: 14px;
+    color: #6b7280;
 }
 
 .register-form {
-    background-color: white;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 500px;
+    gap: 1rem;
 }
 
 .register-form label {
-    display: block;
-    font-weight: bold;
-    color: #333;
     font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.25rem;
 }
 
-.register-form input,
-.register-form select {
-    height: 5vh;
-    font-size: 16px;
+.register-form input {
+    padding: 0.75rem 1rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
+    border-radius: 10px;
+    background: #f9f9f9;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.register-form input:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
 .register-form button {
-    padding: 10px;
-    background-color: #adadad;
+    width: 100%;
+    background: #4f46e5;
     color: white;
-    font-weight: bold;
+    padding: 0.8rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
     cursor: pointer;
-    margin-top: 40px;
 }
 
 .register-form button:hover {
-    background-color: #b4b4b4;
-}
-
-.logo {
-    cursor: pointer;
-    font-size: 32px;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 20px;
-}
-
-.login-link {
-    margin-top: 10px;
-    color: #007bff;
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-}
-
-.login-link span {
-    font-weight: bold;
+    background: #4338ca;
 }
 
 .error-message {
-    color: red;
+    color: #dc2626;
     font-size: 13px;
-    margin-top: -5px;
-    margin-bottom: 10px;
+    margin-top: -0.5rem;
+    margin-bottom: 0.75rem;
     text-align: center;
+}
+
+.login-link {
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+}
+
+.login-link span {
+    color: #6366f1;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.login-link span:hover {
+    text-decoration: underline;
 }

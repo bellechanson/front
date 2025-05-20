@@ -1,25 +1,11 @@
+// pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../store/authSlice";
+import axios from "axios";
+
 import "../../style/user/Login.css";
-import api from "../../api/api.js";
-
-// JWT 토큰 디코딩 함수
-const decodeToken = (token) => {
-    try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        return JSON.parse(jsonPayload);
-    } catch (error) {
-        console.error('Token decode error:', error);
-        return null;
-    }
-};
 
 function Login() {
     const navigate = useNavigate();
@@ -27,12 +13,14 @@ function Login() {
     const [uEmail, setUEmail] = useState("");
     const [uPassword, setUPassword] = useState("");
     const [error, setError] = useState("");
+    const [showResetModal, setShowResetModal] = useState(false);
+
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            console.log('로그인 시도:', { uEmail, uPassword });
-            const res = await api.post("/api/users/login", {
+            const res = await axios.post("http://localhost:8921/api/users/login", {
                 uEmail,
                 uPassword
             }, {
@@ -40,10 +28,7 @@ function Login() {
                     'Content-Type': 'application/json'
                 }
             });
-            
-            console.log('로그인 응답:', res.data);
 
-            // 소프트 딜리트된 계정 체크
             if (res.data.deletedAt) {
                 alert(res.data.message);
                 navigate('/restore-account', { state: { email: uEmail } });
@@ -51,21 +36,15 @@ function Login() {
             }
 
             const { accessToken } = res.data;
-            
-            // 토큰을 localStorage에 저장
             localStorage.setItem('accessToken', accessToken);
-            
-            // axios 기본 헤더에 토큰 설정
-            api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
-            // 사용자 정보 조회
-            const userResponse = await api.get('/api/users/me', {
+            const userResponse = await axios.get('http://localhost:8921/api/users/me', {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
             });
 
-            // Redux에는 사용자 정보만 저장
             dispatch(loginSuccess({
                 uName: userResponse.data.uName,
                 uEmail: userResponse.data.uEmail,
@@ -73,7 +52,6 @@ function Login() {
                 deletedAt: userResponse.data.deletedAt
             }));
 
-            // 로컬 스토리지에 사용자 정보 저장
             localStorage.setItem('userState', JSON.stringify({
                 isLoggedIn: true,
                 user: {
@@ -83,7 +61,7 @@ function Login() {
                     deletedAt: userResponse.data.deletedAt
                 }
             }));
-            
+
             alert("로그인 성공!");
             navigate("/");
 
@@ -98,42 +76,71 @@ function Login() {
     };
 
     return (
-        <div className="login-page">
-            <h2 className="logo" onClick={() => navigate("/")}>STUDYLOG</h2>
-            <form onSubmit={handleLogin} className="login-form">
-                <div>
-                    <label htmlFor="uEmail">이메일</label>
-                    <input
-                        type="text"
-                        id="uEmail"
-                        placeholder="이메일"
-                        value={uEmail}
-                        onChange={(e) => setUEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="uPassword">비밀번호</label>
-                    <input
+        <>
+             <div className="login-header">
+                <h1 className="tone1">StudyLog</h1>
+                <p className="tone1">계정을 등록해주세요</p>
+            </div>
+
+            <form className="login-form" onSubmit={handleLogin}>
+                <div className="form-group">
+                    <label>이메일</label>
+                    <div className="input-icon">
+                        <i className="fas fa-envelope"></i>
+                        <input
+                         type="email"
+                         style={{border:"none"}}
+                         placeholder="이메일을 입력해주세요"
+                         value={uEmail}
+                         onChange={(e) => setUEmail(e.target.value)}
+                         required
+                        />
+                   </div>
+                 </div>
+
+                <div className="form-group">
+                    <label>비밀번호</label>
+                    <div className="input-icon">
+                        <i className="fas fa-lock"></i>
+                         <input
                         type="password"
-                        id="uPassword"
-                        placeholder="비밀번호"
+                        style={{border:"none"}}
+                        placeholder="Enter your password"
                         value={uPassword}
                         onChange={(e) => setUPassword(e.target.value)}
                         required
-                    />
+                         />
+                    </div>
                 </div>
+
+                <div className="form-options">
+                    <span onClick={() => setShowResetModal(true)} className="link">비밀번호 찾기
+                    </span>
+
+                </div>
+
                 {error && <p className="error-message">{error}</p>}
-                <button type="submit">로그인</button>
-                <div className="login-links">
-                    <p onClick={() => navigate("/")}>아이디(이메일) 찾기</p>
-                    <p onClick={() => navigate("/reset-password")}>비밀번호 변경</p>
-                </div>
+
+                <button type="submit" className="submit-btn">로그인</button>
             </form>
-            <p onClick={() => navigate("/register")} className="signup-link">
-                계정이 없으신가요? <span>회원가입</span>
+
+            <p className="login-footer">
+                계정이 없으신가요? <span onClick={() => navigate("/auth")} className="link">Sign up now</span>
             </p>
-        </div>
+            {showResetModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h3>비밀번호 재설정</h3>
+                        <input type="email" placeholder="이메일 입력" className="modal-input" />
+                        <button className="submit-btn">인증 코드 전송</button>
+                        <button className="close-btn" onClick={() => setShowResetModal(false)}>닫기</button>
+                    </div>
+                </div>
+            )}
+
+
+        </>
+
     );
 }
 

@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BoardCategory from "../../components/board/BoardCategory";
 import PostList from "../../components/board/PostList";
 import TagSelector from "../../components/board/TagSelector";
-import '../../style/board/BoardPage.css';
 import SearchBar from "../../components/board/SearchBar.jsx";
+import '../../style/board/BoardPage.css';
+
 
 function BoardPage() {
     const [selectedBoardId, setSelectedBoardId] = useState(null);
